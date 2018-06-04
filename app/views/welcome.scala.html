@@ -1,0 +1,24 @@
+@(message: String,style: String = "scala",couponslist: java.util.List[org.bson.Document])
+
+@defining(play.core.PlayVersion.current) { version =>
+
+    <section id="top">
+        <div class="wrapper">
+            <h1><a href="https://playframework.com/documentation/@version/Home">@message</a></h1>
+        </div>
+    </section>
+
+// fetching data from mongo-db
+    <div id="content" class="wrapper doc">
+        @for(doc<-couponslist){
+            <div class="coupon">
+                    <h1>@doc.get("name")</h1>
+                    <h2>@doc.get("location")</h2>
+                    <p>@doc.get("description")</p>
+                    <h3>@doc.get("price")</h3>
+                    <img src="/assets/@doc.get("imgURL")" class="photo">
+                    <a href="#">Buy Now</a>
+            </div>
+        }
+    </div>
+}
